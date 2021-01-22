@@ -25,8 +25,8 @@ public final class GwlevelsTagManager extends JavaPlugin {
     public static final List<Integer> tagManagerInv_color1 = Arrays.asList(0,1,2,6,7,8,9,10,11,15,16,17,18,26,27,31,35,36,40,44,45,46,47,48,50,51,52,53);
     public static final List<Integer> tagManagerInv_color2 = Arrays.asList(3,4,5,12,14,19,20,21,22,23,24,25,28,30,32,34,37,38,39,41,42,43);
 
-    public static final String PLUGIN_VERSION = "Beta 0.4 (GP) Build 1";
-    public static final String MINION_VERSION = "Beta 1.1 Build 1";
+    public static final String PLUGIN_VERSION = "1.0";
+    public static final String MINION_VERSION = "1.0";
 
     private static GwlevelsTagManager plugin;
 

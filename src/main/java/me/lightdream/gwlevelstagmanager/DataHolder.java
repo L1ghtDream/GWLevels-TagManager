@@ -16,7 +16,7 @@ public class DataHolder
         Bukkit.getScheduler().runTaskTimer(GwlevelsTagManager.getPlugin(), () -> {
             for(Player player : Bukkit.getServer().getOnlinePlayers())
                 GwlevelsTagManager.getChat().setPlayerSuffix(player, Utils.color(TagManager.getRank(GwlevelsTagManager.getTagGlobally(player.getName()), player.getName())));
-        }, 0L, 2000L);
+        }, 0L, 6000L);
     }
 
 
