@@ -28,6 +28,7 @@ public class ItemsInit {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add("");
+        lore.add(Utils.color("&fRank: " + TagManager.getBedWarsRank(player)));
 
         ItemStack output = new ItemBuilder(Material.NAME_TAG).setDisplayName(Utils.color("&b&lBedWars &e&lTAG")).setLore(lore).build();
         ItemMeta meta = output.getItemMeta();

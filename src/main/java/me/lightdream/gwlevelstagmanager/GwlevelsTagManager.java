@@ -25,8 +25,8 @@ public final class GwlevelsTagManager extends JavaPlugin {
     public static final List<Integer> tagManagerInv_color1 = Arrays.asList(0,1,2,6,7,8,9,10,11,15,16,17,18,26,27,31,35,36,40,44,45,46,47,48,50,51,52,53);
     public static final List<Integer> tagManagerInv_color2 = Arrays.asList(3,4,5,12,14,19,20,21,22,23,24,25,28,30,32,34,37,38,39,41,42,43);
 
-    public static final String PLUGIN_VERSION = "Beta 0.3 (Separating TagManager) Build 3";
-    public static final String MINION_VERSION = "Beta 1.0 Build 1";
+    public static final String PLUGIN_VERSION = "Beta 0.4 (GP) Build 1";
+    public static final String MINION_VERSION = "Beta 1.1 Build 1";
 
     private static GwlevelsTagManager plugin;
 
@@ -100,22 +100,29 @@ public final class GwlevelsTagManager extends JavaPlugin {
     //Tags
     public static int getRankBedWars(String player) throws NoUserFound
     {
-        //TODO: Create the child plugin fro BedWars
-        //TODO: First create the database
-        return 0;
+        try {
+            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT lvlTbl.ID FROM (SELECT NAME, BEDWARS, CONCAT(row_number() OVER(ORDER BY BEDWARS DESC)) AS 'ID' FROM " + DatabaseConnector.points +    ") as lvlTbl WHERE lvlTbl.NAME='" + player + "'");
+            System.out.println("SELECT lvlTbl.ID FROM (SELECT NAME, BEDWARS, CONCAT(row_number() OVER(ORDER BY BEDWARS DESC)) AS 'ID' FROM " + DatabaseConnector.points +    ") as lvlTbl WHERE lvlTbl.NAME='" + player + "'");
+            ResultSet rs = st.executeQuery();
+            if (rs.next())
+                return rs.getInt("ID");
+            throw new NoUserFound();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new NoUserFound();
+        }
     }
 
+    //TODO: Create a minon & hook the db
     public static int getRankParkour(String player) throws NoUserFound
     {
-        //TODO: Create the child plugin fro BedWars
-        //TODO: First create the database
         return 0;
     }
 
     public static int getRankLevel(String player) throws NoUserFound
     {
         try {
-            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT lvlTbl.ID FROM (SELECT NAME, XP, CONCAT(row_number() OVER(ORDER BY XP DESC)) AS \"ID\" FROM " + DatabaseConnector.levels +    ") as lvlTbl WHERE lvlTbl.NAME='" + player + "'");
+            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT lvlTbl.ID FROM (SELECT NAME, XP, CONCAT(row_number() OVER(ORDER BY XP DESC)) AS 'ID' FROM " + DatabaseConnector.levels +    ") as lvlTbl WHERE lvlTbl.NAME='" + player + "'");
             ResultSet rs = st.executeQuery();
             if (rs.next())
                 return rs.getInt("ID");
@@ -125,32 +132,25 @@ public final class GwlevelsTagManager extends JavaPlugin {
         }
     }
 
-    //TODO: DO the ops
     public static int getTotalRanksBedWars()
     {
         try {
-            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT COUNT(*) FROM " + DatabaseConnector.levels);
+            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT COUNT(*) FROM " + DatabaseConnector.points + " WHERE BEDWARS != 0");
+            System.out.println("SELECT COUNT(*) FROM " + DatabaseConnector.points + " WHERE BEDWARS != 0");
             ResultSet rs = st.executeQuery();
             if (rs.next())
                 return rs.getInt("COUNT(*)");
             return 0;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new NoUserFound();
         }
     }
 
-    //TODO: DO the ops
+    //TODO: Create a minon & hook the db
     public static int getTotalRanksParkour()
     {
-        try {
-            PreparedStatement st = DatabaseConnector.con.prepareStatement("SELECT COUNT(*) FROM " + DatabaseConnector.levels);
-            ResultSet rs = st.executeQuery();
-            if (rs.next())
-                return rs.getInt("COUNT(*)");
-            return 0;
-        } catch (SQLException e) {
-            throw new NoUserFound();
-        }
+        return 0;
     }
 
     public static int getTotalRanksLevel()
