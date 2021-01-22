@@ -1,6 +1,6 @@
 package me.lightdream.gwlevelstagmanager.managers;
 
-import me.lightdream.gwlevels.Gwlevels;
+import me.lightdream.gwlevelstagmanager.GwlevelsTagManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,21 +34,20 @@ public class TagManager {
     private static final List<String> LevelTags = Arrays.asList("&8[&7INCEPATOR I&8]", "&8[&7INCEPATOR II&8]", "&8[&7INCEPATOR III&8]", "&8[&eMEDIOCRU I&8]",
             "&8[&eMEDIOCRU II&8]", "&8[&eMEDIOCRU III&8]", "&8[&6EXPERIMENTAT I&8]", "&8[&6EXPERIMENTAT II&8]", "&8[&6EXPERIMENTAT III&8]", "&8[&cEXPERT&8]");
 
-    public static String getBedWarsRank (int index, int total)
+    public static String getBedWarsRank (String player)
     {
-        //System.out.println((int)Math.ceil((100.0-(index * 1.0/total*250.0))/100.0*BedWarsTags.size()));
-        //return BedWarsTags.get((int)Math.ceil((100.0-(index * 1.0/total*250.0))/100.0*BedWarsTags.size()));
-        return ParkourTags.get(index - 1);
+        return BedWarsTags.get((int)Math.ceil((100.0-(GwlevelsTagManager.getRankBedWars(player) * 1.0/GwlevelsTagManager.getTotalRanksBedWars()*100.0))/100.0*LevelTags.size()));
     }
 
-    public static String getParkourRank (int index, int total)
+    @Deprecated
+    public static String getParkourRank (String player)
     {
-        return ParkourTags.get(index - 1);
+        return ParkourTags.get((int)Math.ceil((100.0-(GwlevelsTagManager.getRankParkour(player) * 1.0/GwlevelsTagManager.getTotalRanksParkour()*100.0))/100.0*LevelTags.size()));
     }
 
     public static String getLevelRank (String player)
     {
-        return LevelTags.get((int)Math.ceil((100.0-(Gwlevels.getRankLevel(player) * 1.0/Gwlevels.getTotalRanksLevel()*100.0))/100.0*LevelTags.size()));
+        return LevelTags.get((int)Math.ceil((100.0-(GwlevelsTagManager.getRankLevel(player) * 1.0/GwlevelsTagManager.getTotalRanksLevel()*100.0))/100.0*LevelTags.size()));
     }
 
     public static String getRank(String type, String player)

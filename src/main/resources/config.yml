@@ -1,0 +1,10 @@
+host: "127.0.0.1"
+database: "gwlevels"
+user: "root"
+password: "mypass"
+port: 3306
+levels: "levels"
+tags: "tags"
+points: "points"
+
+

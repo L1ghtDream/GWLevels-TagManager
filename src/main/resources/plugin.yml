@@ -1,3 +1,9 @@
 name: GwlevelsTagManager
 version: ${project.version}
 main: me.lightdream.gwlevelstagmanager.GwlevelsTagManager
+authors: [ _LightDream ]
+commands:
+  gwtag:
+    usage: /<command>
+  dev-minion:
+    usage: /<command>
